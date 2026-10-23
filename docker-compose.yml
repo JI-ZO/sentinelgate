@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  sentinelgate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sentinelgate-gateway
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - SENTINEL_HOST=0.0.0.0
+      - SENTINEL_PORT=8000
+      - SENTINEL_UPSTREAM_PROVIDER=mock
+      - SENTINEL_CACHE_ENABLED=true
+      - SENTINEL_CACHE_SIMILARITY_THRESHOLD=0.92
+      - SENTINEL_GUARDRAIL_ENABLE_INJECTION_DEFENSE=true
+      - SENTINEL_GUARDRAIL_ENABLE_PII_MASKING=true
+      - SENTINEL_GUARDRAIL_ENABLE_HALLUCINATION_EVAL=true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - sentinel-net
+
+networks:
+  sentinel-net:
+    driver: bridge
