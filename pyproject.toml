@@ -12,7 +12,10 @@ license = { text = "Apache-2.0" }
 authors = [
     { name = "Al_Adaamm (JI-ZO)" }
 ]
-urls = { Homepage = "https://github.com/JI-ZO/sentinelgate", Repository = "https://github.com/JI-ZO/sentinelgate.git" }
+
+[project.urls]
+Homepage = "https://github.com/JI-ZO/sentinelgate"
+Repository = "https://github.com/JI-ZO/sentinelgate.git"
 keywords = [
     "llm", "guardrails", "security", "evals", "rag", "hallucination", 
     "fastapi", "semantic-cache", "proxy", "observability", "ai-safety"

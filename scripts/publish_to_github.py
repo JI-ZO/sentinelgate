@@ -68,7 +68,9 @@ def verify_account(token: str) -> tuple[str, str, list[str]]:
         print(f"✓ Active Token Scopes: {', '.join(scopes) if scopes else 'None'}")
 
         # Check repository status
-        repo_resp = client.get(f"https://api.github.com/repos/{username}/{REPO_NAME}", headers=headers)
+        repo_resp = client.get(
+            f"https://api.github.com/repos/{username}/{REPO_NAME}", headers=headers
+        )
         if repo_resp.status_code == 200:
             print(f"✓ Repository '{username}/{REPO_NAME}' is ready on GitHub.")
         elif repo_resp.status_code == 404:
@@ -108,7 +110,9 @@ def commit_and_push(username: str, user_email: str, token: str, scopes: list[str
         if wf_dir.exists():
             print("\n⚠️  Note: Your token does not have the 'workflow' scope.")
             print("   GitHub prevents uploading .github/workflows without this permission.")
-            print("   Temporarily shelving .github/workflows so your repository can go live immediately...")
+            print(
+                "   Temporarily shelving .github/workflows so your repository can go live immediately..."
+            )
             workflow_backup = root_dir / ".github_workflows_backup"
             if workflow_backup.exists():
                 shutil.rmtree(workflow_backup)
@@ -127,7 +131,9 @@ def commit_and_push(username: str, user_email: str, token: str, scopes: list[str
                 author=author_str.encode("utf-8"),
                 committer=author_str.encode("utf-8"),
             )
-            print(f"✓ Prepared commit: {commit_sha.decode('utf-8')[:8] if isinstance(commit_sha, bytes) else str(commit_sha)[:8]}")
+            print(
+                f"✓ Prepared commit: {commit_sha.decode('utf-8')[:8] if isinstance(commit_sha, bytes) else str(commit_sha)[:8]}"
+            )
         except Exception:
             pass
 
@@ -139,7 +145,9 @@ def commit_and_push(username: str, user_email: str, token: str, scopes: list[str
 
         # Push with sanitized output stream so token is never logged
         remote_url = f"https://{username}:{token}@github.com/{username}/{REPO_NAME}.git"
-        print(f"\n🚀 Pushing all codebase files to https://github.com/{username}/{REPO_NAME} (branch: main)...")
+        print(
+            f"\n🚀 Pushing all codebase files to https://github.com/{username}/{REPO_NAME} (branch: main)..."
+        )
 
         out_stream = io.BytesIO()
         err_stream = io.BytesIO()
