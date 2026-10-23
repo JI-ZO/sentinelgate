@@ -12,10 +12,6 @@ license = { text = "Apache-2.0" }
 authors = [
     { name = "Al_Adaamm (JI-ZO)" }
 ]
-
-[project.urls]
-Homepage = "https://github.com/JI-ZO/sentinelgate"
-Repository = "https://github.com/JI-ZO/sentinelgate.git"
 keywords = [
     "llm", "guardrails", "security", "evals", "rag", "hallucination", 
     "fastapi", "semantic-cache", "proxy", "observability", "ai-safety"
@@ -42,6 +38,10 @@ dependencies = [
     "prometheus-client>=0.20.0",
     "rich>=13.7.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/JI-ZO/sentinelgate"
+Repository = "https://github.com/JI-ZO/sentinelgate.git"
 
 [project.optional-dependencies]
 dev = [
